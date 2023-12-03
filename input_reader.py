@@ -37,6 +37,10 @@ def read_test_input_lines():
     with open("inputs/test_data.txt", encoding="UTF-8") as file:
         return [line.rstrip('\n') for line in file]
 
+def read_test_input_lines_dont_strip_newlines():
+    with open("inputs/test_data.txt", encoding="UTF-8") as file:
+        return [line for line in file]
+
 def read_input():
     day = get_current_day_and_generate_input_data()
 
@@ -49,6 +53,11 @@ def read_input_lines():
     with open(f"inputs/day_{day}.txt", "r", encoding="UTF-8") as file:
         return [line.rstrip('\n') for line in file]
 
+def read_input_lines_dont_strip_newline():
+    day = get_current_day_and_generate_input_data()
+
+    with open(f"inputs/day_{day}.txt", "r", encoding="UTF-8") as file:
+        return [line for line in file]
 
 
 def get_lines_as_int(lines):
@@ -71,7 +80,6 @@ def get_lines_with_regex_with_int_cast(lines, expr, group_idx=0):
 
 def get_lines_with_regex_groups_int_cast(lines, expr):
     return [regex_groups_int_cast(expr, line) for line in lines]
-
 
 
 def split_as_ints(line, sep=None):
