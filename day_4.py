@@ -15,15 +15,15 @@ def puzzle_1(input):
     print(sum(win_points))
 
 def puzzle_2(input):
-    d = defaultdict(int)
+    card_copies = defaultdict(int)
     for card_nr, winning_nrs, my_nrs in input:
         overlapping_nrs = intersection(winning_nrs, my_nrs)
-        d[card_nr] += 1
+        card_copies[card_nr] += 1
         if (len(overlapping_nrs) > 0):
             for idx in range(len(overlapping_nrs)):
-                nr_copies = d[card_nr]
-                d[card_nr + idx + 1] += nr_copies
-    print(sum([x for x in d.values()]))
+                nr_copies = card_copies[card_nr]
+                card_copies[card_nr + idx + 1] += nr_copies
+    print(sum([x for x in card_copies.values()]))
 
 def parse_input(input):
     parsed_input = []
