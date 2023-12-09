@@ -23,33 +23,25 @@ def puzzle_1(seeds, maps):
 def puzzle_2(unparsed_seeds, maps):
     seed_ranges = re.findall("(\d+) (\d+)", unparsed_seeds)
     seed_ranges = [range(int(x), int(x) + int(y)) for x, y in seed_ranges]
-    que = set()
+
+    lowest_location = seed_ranges[0][0]
     for seed_range in seed_ranges:
-        for conversion_range, _ in maps[0]:
-            #actual_range = range(max(seed_range[0], conversion_range[0]), min(seed_range[-1], conversion_range[-1])+1)
-            #que.add(seed_range[0])
-            #if actual_range:
-            #    que.add(actual_range[0])
+        for idx, seed in enumerate(seed_range):
+            if idx % 1000000 == 0:
+                print(seed)
 
-            que.add(seed_range[0])
-            if conversion_range[0] in seed_range and conversion_range[-1] in seed_range:
-                que.add(conversion_range[0])
-            if conversion_range[-1] in seed_range:
-                que.add(conversion_range[-1] + 1)
-            if conversion_range[0] in seed_range:
-                que.add(conversion_range[0])
-
-    destination_nrs = []
-    for map in maps:
-        destination_nrs = []
-        for val in que:
-            destination_val = get_destination_value(int(val), map)
-            destination_nrs.append(destination_val)
-        que = destination_nrs
-    print(sorted(destination_nrs))
+            val = seed
+            for map in maps:
+                for r, x in map:
+                    if val in r:
+                        val = val + x
+                        break
+            if val < lowest_location:
+                lowest_location = val
+    print(lowest_location)
 
 if __name__ == "__main__":
-    input = ir.read_test_input()
+    input = ir.read_input()
     parts = input.split("\n\n")
     seeds = re.findall("\d+", parts[0])
     maps = parts[1:]
