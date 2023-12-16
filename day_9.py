@@ -59,7 +59,5 @@ def puzzle_2(puzzle_input):
 
 if __name__ == "__main__":
     input = [[int(s) for s in line.split()] for line in ir.read_input_lines()]
-    first_list = copy.deepcopy(input)
-    second_list = copy.deepcopy(input)
-    puzzle_1(first_list)
-    puzzle_2(second_list)
+    puzzle_1(copy.deepcopy(input))
+    puzzle_2(copy.deepcopy(input))
